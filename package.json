@@ -2,9 +2,12 @@
   "name": "simctl-mcp",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "dev": "npx fastmcp dev src/index.ts",
+    "dev:tsx": "tsx src/index.ts",
+    "dev:nodemon": "nodemon --watch 'src/**/*.ts' --exec 'tsx' src/index.ts --transport stdio",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,5 +20,10 @@
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "fastmcp": "^1.20.5",
+    "node-simctl": "^7.7.2",
+    "zod": "^3.24.2"
   }
 }
