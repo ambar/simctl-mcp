@@ -635,9 +635,11 @@ export function createSimctlMcpServer() {
     async ({udid, path}) => {
       try {
         const simctl = new Simctl({udid})
-        await simctl.getScreeenshot(path)
+        const r = await simctl.exec('io', {
+          args: [udid, 'screenshot', path],
+        })
         return {
-          content: [{type: 'text', text: '截图获取成功'}],
+          content: [{type: 'text', text: r.stdout || r.stderr}],
         }
       } catch (error) {
         Logger.error(`获取截图失败: ${error}`)
