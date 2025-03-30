@@ -53,26 +53,43 @@ npx simctl-mcp --stdio
 
 ## Tools
 
-Device Management:
-1. Create simulator device: Create a new simulator with specified name, runtime, and device type
-2. Delete simulator device: Remove a simulator by its UDID
-3. Boot/Shutdown device: Control simulator power state
-4. List devices, device types, and runtimes: Get information about available simulators
+Based on the code, I can help you with the following iOS simulator operations:
 
-App Management:
-1. Install/Uninstall apps
-2. Launch/Terminate apps
-3. Get app container path and app info
-4. Open URLs in simulator
+## Device Management:
+- Create new simulator devices
+- Delete existing devices
+- Boot devices
+- Shutdown devices
+- List all available devices
+- List available device types
+- List available runtimes
 
-Device Configuration:
-1. Environment variables: Get device environment variables
-2. Appearance settings: Get/Set light/dark mode
-3. Permissions: Grant/Revoke/Reset app permissions
-4. Keychain: Add certificates and reset keychain
+## App Management:
+- Install apps
+- Uninstall apps
+- Launch apps
+- Terminate running apps
+- Get app container path
+- Get app information
+- List installed apps
 
-Media & Testing:
-1. Add media files to simulator
-2. Send push notifications
-3. Take screenshots
-4. Add test certificates
+## App Permissions:
+- Grant permissions to apps
+- Revoke app permissions
+- Reset all app permissions
+
+## System Features:
+- Open URLs in simulator
+- Add media files
+- Get/Set environment variables
+- Get/Set appearance (light/dark mode)
+- Send simulated push notifications
+
+## Certificate & Security:
+- Add root certificates
+- Add regular certificates
+- Reset keychain
+
+## Media & Content:
+- Take screenshots
+- Get/Set pasteboard content (clipboard)
