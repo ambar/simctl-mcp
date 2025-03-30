@@ -5,7 +5,7 @@ import {createSimctlMcpServer} from './server.js'
 import arg from 'arg'
 
 const argSpec = {
-  '--stdio': Boolean,
+  '--http': Boolean,
   '--port': Number,
   // 别名
   '-p': '--port'
@@ -31,8 +31,8 @@ function getPort(args: Args): number {
   // 然后检查环境变量
   const envPort = process.env.PORT
   if (envPort) {
-    const port = parseInt(envPort)
-    if (!isNaN(port)) {
+    const port = Number.parseInt(envPort)
+    if (!Number.isNaN(port)) {
       return port
     }
   }
@@ -44,13 +44,14 @@ function getPort(args: Args): number {
 export async function startServer(): Promise<void> {
   const args = parseArgs()
   const server = createSimctlMcpServer()
-  if (args['--stdio']) {
-    const transport = new StdioServerTransport()
-    await server.connect(transport)
-  } else {
+  if (args['--http']) {
     const port = getPort(args)
     await server.startHttpServer(port)
+    return
   }
+
+  const transport = new StdioServerTransport()
+  await server.connect(transport)
 }
 
 startServer().catch((error) => {

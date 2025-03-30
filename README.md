@@ -9,12 +9,12 @@ A Model Context Protocol server implementation for iOS Simulator control.
 ```json
 {
   "mcpServers": {
-    "simctl-mcp-sse": {
-      "url": "http://localhost:8081/sse"
-    },
     "simctl-mcp-stdio": {
       "command": "npx",
-      "args": ["simctl-mcp", "--stdio"]
+      "args": ["simctl-mcp"]
+    },
+    "simctl-mcp-http": {
+      "url": "http://localhost:8081/sse"
     }
   }
 }
@@ -27,29 +27,28 @@ The server can be started in two modes:
 1. HTTP Server Mode (default)
 2. STDIO Mode
 
+### STDIO Mode
+
+In STDIO mode, the server communicates through standard input/output streams.
+
+```bash
+npx simctl-mcp
+```
+
 ### HTTP Server Mode
 
 In HTTP server mode, the server listens for HTTP connections on a specified port.
 
 ```bash
 # Start with default port (8081)
-npx simctl-mcp
+npx simctl-mcp --http
 
 # Start with custom port using --port flag
-npx simctl-mcp --port 3000
+npx simctl-mcp --http --port 3000
 
 # Start with custom port using environment variable
-PORT=3000 npx simctl-mcp
+PORT=3000 npx simctl-mcp --http
 ```
-
-### STDIO Mode
-
-In STDIO mode, the server communicates through standard input/output streams.
-
-```bash
-npx simctl-mcp --stdio
-```
-
 
 ## Tools
 

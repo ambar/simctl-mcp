@@ -1,11 +1,15 @@
 {
   "mcpServers": {
-    "simctl-mcp": {
+    "simctl-mcp-stdio": {
+      "command": "npx",
+      "args": ["simctl-mcp"]
+    },
+    "simctl-mcp-http": {
       "url": "http://localhost:8081/sse"
     },
-    "simctl-mcp-stdio": {
-      "command": "tsx",
-      "args": ["src/index.ts"]
+    "simctl-mcp-stdio-dev": {
+      "command": "pnpm",
+      "args": ["dev"]
     }
   }
 }
