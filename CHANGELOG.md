@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/ambar/simctl-mcp/compare/v0.0.2...v0.0.3) (2025-03-30)
+
+
+### Features
+
+* default to stdio ([e6f2c8f](https://github.com/ambar/simctl-mcp/commit/e6f2c8f433a1d0ea27caf6e294db29c433377876))
+
 ### [0.0.2](https://github.com/ambar/simctl-mcp/compare/v0.0.1...v0.0.2) (2025-03-30)
 
 
