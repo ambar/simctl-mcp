@@ -652,6 +652,32 @@ export function createSimctlMcpServer() {
     },
   )
 
+  // List apps
+  server.tool(
+    'list_apps',
+    'List installed apps on device',
+    {
+      udid: z.string().describe('Device unique identifier'),
+    },
+    async ({udid}) => {
+      try {
+        const simctl = new Simctl({udid})
+        const r = await simctl.exec('listapps', {
+          args: [udid],
+        })
+        return {
+          content: [{type: 'text', text: r.stdout || r.stderr}],
+        }
+      } catch (error) {
+        Logger.error(`Failed to list apps: ${error}`)
+        return {
+          isError: true,
+          content: [{type: 'text', text: `Failed to list apps: ${error}`}],
+        }
+      }
+    },
+  )
+
   return {
     async connect(transport: Transport): Promise<void> {
       await server.connect(transport)
