@@ -2,6 +2,7 @@
   "name": "simctl-mcp",
   "version": "0.0.3",
   "description": "simctl mcp server",
+  "repository": "ambar/simctl-mcp",
   "type": "module",
   "bin": {
     "simctl-mcp": "dist/index.js"
