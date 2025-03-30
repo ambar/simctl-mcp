@@ -9,7 +9,7 @@ A Model Context Protocol server implementation for iOS Simulator control.
 ```json
 {
   "mcpServers": {
-    "simctl-mcp-stdio": {
+    "simctl-mcp": {
       "command": "npx",
       "args": ["simctl-mcp"]
     },

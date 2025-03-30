@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "simctl-mcp-stdio": {
+    "simctl-mcp": {
       "command": "npx",
       "args": ["simctl-mcp"]
     },
