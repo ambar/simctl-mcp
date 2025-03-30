@@ -12,9 +12,6 @@ A Model Context Protocol server implementation for iOS Simulator control.
     "simctl-mcp": {
       "command": "npx",
       "args": ["simctl-mcp"]
-    },
-    "simctl-mcp-http": {
-      "url": "http://localhost:8081/sse"
     }
   }
 }
