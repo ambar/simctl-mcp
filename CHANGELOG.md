@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/ambar/simctl-mcp/compare/v0.0.1...v0.0.2) (2025-03-30)
+
+
+### Features
+
+* add get_pasteboard/set_pasteboard ([b6e8c05](https://github.com/ambar/simctl-mcp/commit/b6e8c05721c77bad1381d6d8d1e157b69ffdd4ab))
+
+
+### Bug Fixes
+
+* fix path for addMedia ([268d0c3](https://github.com/ambar/simctl-mcp/commit/268d0c3b1f48e64f7fa26b7bc28a9359134179aa))
+
 ### 0.0.1 (2025-03-30)
 
 
