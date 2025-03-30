@@ -679,6 +679,55 @@ export function createSimctlMcpServer() {
     },
   )
 
+  // Set pasteboard content
+  server.tool(
+    'set_pasteboard',
+    'Copy content to the device pasteboard',
+    {
+      udid: z.string().describe('Device unique identifier'),
+      content: z.string().describe('Content to copy to pasteboard'),
+    },
+    async ({udid, content}) => {
+      try {
+        const simctl = new Simctl({udid})
+        await simctl.setPasteboard(content)
+        return {
+          content: [{type: 'text', text: 'Content copied to pasteboard successfully'}],
+        }
+      } catch (error) {
+        Logger.error(`Failed to copy content to pasteboard: ${error}`)
+        return {
+          isError: true,
+          content: [{type: 'text', text: `Failed to copy content to pasteboard: ${error}`}],
+        }
+      }
+    },
+  )
+
+  // Get pasteboard content
+  server.tool(
+    'get_pasteboard',
+    'Get the contents of the device pasteboard',
+    {
+      udid: z.string().describe('Device unique identifier'),
+    },
+    async ({udid}) => {
+      try {
+        const simctl = new Simctl({udid})
+        const r = await simctl.getPasteboard()
+        return {
+          content: [{type: 'text', text: r}],
+        }
+      } catch (error) {
+        Logger.error(`Failed to get pasteboard content: ${error}`)
+        return {
+          isError: true,
+          content: [{type: 'text', text: `Failed to get pasteboard content: ${error}`}],
+        }
+      }
+    },
+  )
+
   return {
     async connect(transport: Transport): Promise<void> {
       await server.connect(transport)
