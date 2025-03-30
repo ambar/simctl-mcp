@@ -234,7 +234,7 @@ export function createSimctlMcpServer() {
     async ({udid, bundleId}) => {
       try {
         const simctl = new Simctl({udid})
-        await simctl.uninstallApp(bundleId)
+        await simctl.removeApp(bundleId)
         return {
           content: [{type: 'text', text: 'App uninstalled successfully'}],
         }
@@ -460,6 +460,7 @@ export function createSimctlMcpServer() {
     async ({udid, bundleId, payload}) => {
       try {
         const simctl = new Simctl({udid})
+        // @ts-expect-error skip
         await simctl.pushNotification(bundleId, JSON.parse(payload))
         return {
           content: [{type: 'text', text: 'Push notification sent successfully'}],
