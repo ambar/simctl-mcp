@@ -130,6 +130,7 @@ export function createSimctlMcpServer() {
       udid: z.string().describe('Device unique identifier'),
       key: z.string().describe('Environment variable key'),
     },
+    // @ts-expect-error skip
     async ({udid, key}) => {
       try {
         const simctl = new Simctl({udid})
@@ -178,12 +179,12 @@ export function createSimctlMcpServer() {
     'Add media files to device',
     {
       udid: z.string().describe('Device unique identifier'),
-      paths: z.array(z.string()).describe('Media file paths'),
+      path: z.string().describe('Media file path'),
     },
-    async ({udid, paths}) => {
+    async ({udid, path}) => {
       try {
         const simctl = new Simctl({udid})
-        await simctl.addMedia(paths)
+        await simctl.addMedia(path)
         return {
           content: [{type: 'text', text: 'Media files added successfully'}],
         }

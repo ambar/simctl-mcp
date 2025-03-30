@@ -13,6 +13,7 @@
     "dev": "tsx --watch src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "lint:fix-unsafe": "biome check --write -unsafe ."
