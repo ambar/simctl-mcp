@@ -24,14 +24,14 @@ export function createSimctlMcpServer() {
 
   let sseTransport: SSEServerTransport | null = null
 
-  // 创建新设备
+  // Create new device
   server.tool(
     'create_device',
-    '创建一个新的模拟器设备',
+    'Create a new simulator device',
     {
-      name: z.string().describe('设备名称'),
-      runtime: z.string().describe('运行时版本'),
-      deviceType: z.string().describe('设备类型'),
+      name: z.string().describe('Device name'),
+      runtime: z.string().describe('Runtime version'),
+      deviceType: z.string().describe('Device type'),
     },
     async ({name, runtime, deviceType}) => {
       try {
@@ -41,94 +41,94 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: JSON.stringify(device)}],
         }
       } catch (error) {
-        Logger.error(`创建设备失败: ${error}`)
+        Logger.error(`Failed to create device: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `创建设备失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to create device: ${error}`}],
         }
       }
     },
   )
 
-  // 删除设备
+  // Delete device
   server.tool(
     'delete_device',
-    '删除指定的模拟器设备',
+    'Delete the specified simulator device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
+      udid: z.string().describe('Device unique identifier'),
     },
     async ({udid}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.deleteDevice()
         return {
-          content: [{type: 'text', text: '设备删除成功'}],
+          content: [{type: 'text', text: 'Device deleted successfully'}],
         }
       } catch (error) {
-        Logger.error(`删除设备失败: ${error}`)
+        Logger.error(`Failed to delete device: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `删除设备失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to delete device: ${error}`}],
         }
       }
     },
   )
 
-  // 启动设备
+  // Boot device
   server.tool(
     'boot_device',
-    '启动模拟器设备',
+    'Boot simulator device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
+      udid: z.string().describe('Device unique identifier'),
     },
     async ({udid}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.bootDevice()
         return {
-          content: [{type: 'text', text: '设备启动成功'}],
+          content: [{type: 'text', text: 'Device booted successfully'}],
         }
       } catch (error) {
-        Logger.error(`启动设备失败: ${error}`)
+        Logger.error(`Failed to boot device: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `启动设备失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to boot device: ${error}`}],
         }
       }
     },
   )
 
-  // 关闭设备
+  // Shutdown device
   server.tool(
     'shutdown_device',
-    '关闭模拟器设备',
+    'Shutdown simulator device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
+      udid: z.string().describe('Device unique identifier'),
     },
     async ({udid}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.shutdownDevice()
         return {
-          content: [{type: 'text', text: '设备关闭成功'}],
+          content: [{type: 'text', text: 'Device shutdown successfully'}],
         }
       } catch (error) {
-        Logger.error(`关闭设备失败: ${error}`)
+        Logger.error(`Failed to shutdown device: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `关闭设备失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to shutdown device: ${error}`}],
         }
       }
     },
   )
 
-  // 获取环境变量
+  // Get environment variable
   server.tool(
     'get_env',
-    '获取设备的环境变量',
+    'Get device environment variable',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      key: z.string().describe('环境变量的键名'),
+      udid: z.string().describe('Device unique identifier'),
+      key: z.string().describe('Environment variable key'),
     },
     async ({udid, key}) => {
       try {
@@ -138,122 +138,122 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: value}],
         }
       } catch (error) {
-        Logger.error(`获取环境变量失败: ${error}`)
+        Logger.error(`Failed to get environment variable: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `获取环境变量失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to get environment variable: ${error}`}],
         }
       }
     },
   )
 
-  // 打开 URL
+  // Open URL
   server.tool(
     'open_url',
-    '在设备中打开 URL',
+    'Open URL in device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      url: z.string().describe('要打开的 URL'),
+      udid: z.string().describe('Device unique identifier'),
+      url: z.string().describe('URL to open'),
     },
     async ({udid, url}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.openUrl(url)
         return {
-          content: [{type: 'text', text: 'URL 打开成功'}],
+          content: [{type: 'text', text: 'URL opened successfully'}],
         }
       } catch (error) {
-        Logger.error(`打开 URL 失败: ${error}`)
+        Logger.error(`Failed to open URL: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `打开 URL 失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to open URL: ${error}`}],
         }
       }
     },
   )
 
-  // 添加媒体文件
+  // Add media
   server.tool(
     'add_media',
-    '向设备添加媒体文件',
+    'Add media files to device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      paths: z.array(z.string()).describe('媒体文件路径列表'),
+      udid: z.string().describe('Device unique identifier'),
+      paths: z.array(z.string()).describe('Media file paths'),
     },
     async ({udid, paths}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.addMedia(paths)
         return {
-          content: [{type: 'text', text: '媒体文件添加成功'}],
+          content: [{type: 'text', text: 'Media files added successfully'}],
         }
       } catch (error) {
-        Logger.error(`添加媒体文件失败: ${error}`)
+        Logger.error(`Failed to add media files: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `添加媒体文件失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to add media files: ${error}`}],
         }
       }
     },
   )
 
-  // 安装应用
+  // Install app
   server.tool(
     'install_app',
-    '在设备上安装应用',
+    'Install app on device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      path: z.string().describe('应用文件路径'),
+      udid: z.string().describe('Device unique identifier'),
+      path: z.string().describe('App file path'),
     },
     async ({udid, path}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.installApp(path)
         return {
-          content: [{type: 'text', text: '应用安装成功'}],
+          content: [{type: 'text', text: 'App installed successfully'}],
         }
       } catch (error) {
-        Logger.error(`安装应用失败: ${error}`)
+        Logger.error(`Failed to install app: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `安装应用失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to install app: ${error}`}],
         }
       }
     },
   )
 
-  // 卸载应用
+  // Uninstall app
   server.tool(
     'uninstall_app',
-    '从设备上卸载应用',
+    'Uninstall app from device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
     },
     async ({udid, bundleId}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.uninstallApp(bundleId)
         return {
-          content: [{type: 'text', text: '应用卸载成功'}],
+          content: [{type: 'text', text: 'App uninstalled successfully'}],
         }
       } catch (error) {
-        Logger.error(`卸载应用失败: ${error}`)
+        Logger.error(`Failed to uninstall app: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `卸载应用失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to uninstall app: ${error}`}],
         }
       }
     },
   )
 
-  // 获取应用容器路径
+  // Get app container
   server.tool(
     'get_app_container',
-    '获取已安装应用的容器路径',
+    'Get installed app container path',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
     },
     async ({udid, bundleId}) => {
       try {
@@ -263,67 +263,67 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: path}],
         }
       } catch (error) {
-        Logger.error(`获取应用容器路径失败: ${error}`)
+        Logger.error(`Failed to get app container path: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `获取应用容器路径失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to get app container path: ${error}`}],
         }
       }
     },
   )
 
-  // 启动应用
+  // Launch app
   server.tool(
     'launch_app',
-    '在设备上启动应用',
+    'Launch app on device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
     },
     async ({udid, bundleId}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.launchApp(bundleId)
         return {
-          content: [{type: 'text', text: '应用启动成功'}],
+          content: [{type: 'text', text: 'App launched successfully'}],
         }
       } catch (error) {
-        Logger.error(`启动应用失败: ${error}`)
+        Logger.error(`Failed to launch app: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `启动应用失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to launch app: ${error}`}],
         }
       }
     },
   )
 
-  // 终止应用
+  // Terminate app
   server.tool(
     'terminate_app',
-    '终止设备上运行的应用',
+    'Terminate running app on device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
     },
     async ({udid, bundleId}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.terminateApp(bundleId)
         return {
-          content: [{type: 'text', text: '应用终止成功'}],
+          content: [{type: 'text', text: 'App terminated successfully'}],
         }
       } catch (error) {
-        Logger.error(`终止应用失败: ${error}`)
+        Logger.error(`Failed to terminate app: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `终止应用失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to terminate app: ${error}`}],
         }
       }
     },
   )
 
-  // 获取设备列表
-  server.tool('list_devices', '获取可用的模拟器设备列表', {}, async () => {
+  // List devices
+  server.tool('list_devices', 'List available simulator devices', {}, async () => {
     try {
       const simctl = new Simctl()
       const devices = await simctl.getDevices()
@@ -331,16 +331,16 @@ export function createSimctlMcpServer() {
         content: [{type: 'text', text: JSON.stringify(devices)}],
       }
     } catch (error) {
-      Logger.error(`获取设备列表失败: ${error}`)
+      Logger.error(`Failed to get device list: ${error}`)
       return {
         isError: true,
-        content: [{type: 'text', text: `获取设备列表失败: ${error}`}],
+        content: [{type: 'text', text: `Failed to get device list: ${error}`}],
       }
     }
   })
 
-  // 获取设备类型列表
-  server.tool('list_device_types', '获取可用的设备类型列表', {}, async () => {
+  // List device types
+  server.tool('list_device_types', 'List available device types', {}, async () => {
     try {
       const simctl = new Simctl()
       const deviceTypes = await simctl.getDeviceTypes()
@@ -348,16 +348,16 @@ export function createSimctlMcpServer() {
         content: [{type: 'text', text: JSON.stringify(deviceTypes)}],
       }
     } catch (error) {
-      Logger.error(`获取设备类型列表失败: ${error}`)
+      Logger.error(`Failed to get device types: ${error}`)
       return {
         isError: true,
-        content: [{type: 'text', text: `获取设备类型列表失败: ${error}`}],
+        content: [{type: 'text', text: `Failed to get device types: ${error}`}],
       }
     }
   })
 
-  // 获取运行时列表
-  server.tool('list_runtimes', '获取可用的运行时列表', {}, async () => {
+  // List runtimes
+  server.tool('list_runtimes', 'List available runtimes', {}, async () => {
     try {
       const simctl = new Simctl()
       const runtimes = await simctl.list()
@@ -365,21 +365,21 @@ export function createSimctlMcpServer() {
         content: [{type: 'text', text: JSON.stringify(runtimes)}],
       }
     } catch (error) {
-      Logger.error(`获取运行时列表失败: ${error}`)
+      Logger.error(`Failed to get runtimes: ${error}`)
       return {
         isError: true,
-        content: [{type: 'text', text: `获取运行时列表失败: ${error}`}],
+        content: [{type: 'text', text: `Failed to get runtimes: ${error}`}],
       }
     }
   })
 
-  // 获取应用信息
+  // Get app info
   server.tool(
     'get_app_info',
-    '获取已安装应用的信息',
+    'Get installed app information',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
     },
     async ({udid, bundleId}) => {
       try {
@@ -389,21 +389,21 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: JSON.stringify(info)}],
         }
       } catch (error) {
-        Logger.error(`获取应用信息失败: ${error}`)
+        Logger.error(`Failed to get app info: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `获取应用信息失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to get app info: ${error}`}],
         }
       }
     },
   )
 
-  // 获取设备外观设置
+  // Get appearance
   server.tool(
     'get_appearance',
-    '获取设备的外观设置',
+    'Get device appearance settings',
     {
-      udid: z.string().describe('设备的唯一标识符'),
+      udid: z.string().describe('Device unique identifier'),
     },
     async ({udid}) => {
       try {
@@ -413,224 +413,225 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: appearance}],
         }
       } catch (error) {
-        Logger.error(`获取外观设置失败: ${error}`)
+        Logger.error(`Failed to get appearance: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `获取外观设置失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to get appearance: ${error}`}],
         }
       }
     },
   )
 
-  // 设置设备外观
+  // Set appearance
   server.tool(
     'set_appearance',
-    '设置设备的外观',
+    'Set device appearance',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      appearance: z.string().describe('外观设置 (light/dark)'),
+      udid: z.string().describe('Device unique identifier'),
+      appearance: z.string().describe('Appearance setting (light/dark)'),
     },
     async ({udid, appearance}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.setAppearance(appearance)
         return {
-          content: [{type: 'text', text: '外观设置成功'}],
+          content: [{type: 'text', text: 'Appearance set successfully'}],
         }
       } catch (error) {
-        Logger.error(`设置外观失败: ${error}`)
+        Logger.error(`Failed to set appearance: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `设置外观失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to set appearance: ${error}`}],
         }
       }
     },
   )
 
-  // 发送推送通知
+  // Push notification
   server.tool(
     'push_notification',
-    '向设备发送模拟推送通知',
+    'Send simulated push notification to device',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
-      payload: z.string().describe('推送通知的 JSON 负载'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
+      payload: z.string().describe('Push notification JSON payload'),
     },
     async ({udid, bundleId, payload}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.pushNotification(bundleId, JSON.parse(payload))
         return {
-          content: [{type: 'text', text: '推送通知发送成功'}],
+          content: [{type: 'text', text: 'Push notification sent successfully'}],
         }
       } catch (error) {
-        Logger.error(`发送推送通知失败: ${error}`)
+        Logger.error(`Failed to send push notification: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `发送推送通知失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to send push notification: ${error}`}],
         }
       }
     },
   )
 
-  // 授予权限
+  // Grant permission
   server.tool(
     'grant_permission',
-    '向应用授予权限',
+    'Grant permission to app',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
-      permission: z.string().describe('权限类型'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
+      permission: z.string().describe('Permission type'),
     },
     async ({udid, bundleId, permission}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.grantPermission(bundleId, permission)
         return {
-          content: [{type: 'text', text: '权限授予成功'}],
+          content: [{type: 'text', text: 'Permission granted successfully'}],
         }
       } catch (error) {
-        Logger.error(`授予权限失败: ${error}`)
+        Logger.error(`Failed to grant permission: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `授予权限失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to grant permission: ${error}`}],
         }
       }
     },
   )
 
-  // 撤销权限
+  // Revoke permission
   server.tool(
     'revoke_permission',
-    '撤销应用的权限',
+    'Revoke app permission',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
-      permission: z.string().describe('权限类型'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
+      permission: z.string().describe('Permission type'),
     },
     async ({udid, bundleId, permission}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.revokePermission(bundleId, permission)
         return {
-          content: [{type: 'text', text: '权限撤销成功'}],
+          content: [{type: 'text', text: 'Permission revoked successfully'}],
         }
       } catch (error) {
-        Logger.error(`撤销权限失败: ${error}`)
+        Logger.error(`Failed to revoke permission: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `撤销权限失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to revoke permission: ${error}`}],
         }
       }
     },
   )
 
-  // 重置权限
+  // Reset permission
   server.tool(
     'reset_permission',
-    '重置应用的所有权限',
+    'Reset all app permissions',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      bundleId: z.string().describe('应用的 Bundle ID'),
+      udid: z.string().describe('Device unique identifier'),
+      bundleId: z.string().describe('App Bundle ID'),
+      permission: z.string().describe('Permission type'),
     },
-    async ({udid, bundleId}) => {
+    async ({udid, bundleId, permission}) => {
       try {
         const simctl = new Simctl({udid})
-        await simctl.resetPermission(bundleId)
+        await simctl.resetPermission(bundleId, permission)
         return {
-          content: [{type: 'text', text: '权限重置成功'}],
+          content: [{type: 'text', text: 'Permissions reset successfully'}],
         }
       } catch (error) {
-        Logger.error(`重置权限失败: ${error}`)
+        Logger.error(`Failed to reset permissions: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `重置权限失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to reset permissions: ${error}`}],
         }
       }
     },
   )
 
-  // 添加根证书
+  // Add root certificate
   server.tool(
     'add_root_certificate',
-    '向设备的钥匙串添加根证书',
+    'Add root certificate to device keychain',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      path: z.string().describe('证书文件路径'),
+      udid: z.string().describe('Device unique identifier'),
+      path: z.string().describe('Certificate file path'),
     },
     async ({udid, path}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.addRootCertificate(path)
         return {
-          content: [{type: 'text', text: '根证书添加成功'}],
+          content: [{type: 'text', text: 'Root certificate added successfully'}],
         }
       } catch (error) {
-        Logger.error(`添加根证书失败: ${error}`)
+        Logger.error(`Failed to add root certificate: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `添加根证书失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to add root certificate: ${error}`}],
         }
       }
     },
   )
 
-  // 添加证书
+  // Add certificate
   server.tool(
     'add_certificate',
-    '向设备的钥匙串添加证书',
+    'Add certificate to device keychain',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      path: z.string().describe('证书文件路径'),
+      udid: z.string().describe('Device unique identifier'),
+      path: z.string().describe('Certificate file path'),
     },
     async ({udid, path}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.addCertificate(path)
         return {
-          content: [{type: 'text', text: '证书添加成功'}],
+          content: [{type: 'text', text: 'Certificate added successfully'}],
         }
       } catch (error) {
-        Logger.error(`添加证书失败: ${error}`)
+        Logger.error(`Failed to add certificate: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `添加证书失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to add certificate: ${error}`}],
         }
       }
     },
   )
 
-  // 重置钥匙串
+  // Reset keychain
   server.tool(
     'reset_keychain',
-    '重置设备的钥匙串',
+    'Reset device keychain',
     {
-      udid: z.string().describe('设备的唯一标识符'),
+      udid: z.string().describe('Device unique identifier'),
     },
     async ({udid}) => {
       try {
         const simctl = new Simctl({udid})
         await simctl.resetKeychain()
         return {
-          content: [{type: 'text', text: '钥匙串重置成功'}],
+          content: [{type: 'text', text: 'Keychain reset successfully'}],
         }
       } catch (error) {
-        Logger.error(`重置钥匙串失败: ${error}`)
+        Logger.error(`Failed to reset keychain: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `重置钥匙串失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to reset keychain: ${error}`}],
         }
       }
     },
   )
 
-  // 获取设备截图
+  // Get screenshot
   server.tool(
     'get_screenshot',
-    '获取设备的截图',
+    'Get device screenshot',
     {
-      udid: z.string().describe('设备的唯一标识符'),
-      path: z.string().describe('截图保存路径'),
+      udid: z.string().describe('Device unique identifier'),
+      path: z.string().describe('Screenshot save path'),
     },
     async ({udid, path}) => {
       try {
@@ -642,10 +643,10 @@ export function createSimctlMcpServer() {
           content: [{type: 'text', text: r.stdout || r.stderr}],
         }
       } catch (error) {
-        Logger.error(`获取截图失败: ${error}`)
+        Logger.error(`Failed to get screenshot: ${error}`)
         return {
           isError: true,
-          content: [{type: 'text', text: `获取截图失败: ${error}`}],
+          content: [{type: 'text', text: `Failed to get screenshot: ${error}`}],
         }
       }
     },
