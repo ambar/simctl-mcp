@@ -1,28 +1,28 @@
 {
   "name": "simctl-mcp",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.0",
+  "description": "simctl mcp server",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "npx fastmcp dev src/index.ts",
-    "dev:tsx": "tsx src/index.ts",
-    "dev:nodemon": "nodemon --watch 'src/**/*.ts' --exec 'tsx' src/index.ts --transport stdio",
-    "build": "tsc",
+    "dev": "tsx index.ts",
     "start": "node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "lint:fix-unsafe": "biome check --write -unsafe ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["mcp", "simctl"],
+  "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@recommended/biome-config": "^1.1.0",
     "@types/node": "^22.13.14",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "fastmcp": "^1.20.5",
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "express": "^4.21.2",
     "node-simctl": "^7.7.2",
     "zod": "^3.24.2"
   },

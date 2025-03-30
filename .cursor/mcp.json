@@ -1,10 +1,7 @@
 {
   "mcpServers": {
     "simctl-mcp": {
-      "url": "http://localhost:8081/sse",
-      "env": {
-        "API_KEY": "value"
-      }
+      "url": "http://localhost:8081/sse"
     },
     "simctl-mcp-stdio": {
       "command": "tsx",

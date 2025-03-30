@@ -1,31 +1,20 @@
-import { FastMCP } from "fastmcp";
-import { z } from "zod";
+#!/usr/bin/env node
 
-const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
-});
+import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js'
+import {createSimctlMcpServer} from './server.js'
 
-server.addTool({
-  name: "add",
-  description: "Add two numbers",
-  parameters: z.object({
-    a: z.number(),
-    b: z.number(),
-  }),
-  execute: async (args) => {
-    return String(args.a + args.b);
-  },
-});
+export async function startServer(): Promise<void> {
+  const isStdioMode = process.argv.includes('--stdio')
+  const server = createSimctlMcpServer()
+  if (isStdioMode) {
+    const transport = new StdioServerTransport()
+    await server.connect(transport)
+  } else {
+    await server.startHttpServer(8081)
+  }
+}
 
-// server.start({
-//   transportType: "stdio",
-// });
-
-server.start({
-  transportType: "sse",
-  sse: {
-    endpoint: "/sse",
-    port: 8081,
-  },
-});
+startServer().catch((error) => {
+  console.error('Failed to start server:', error)
+  process.exit(1)
+})
