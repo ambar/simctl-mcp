@@ -17,6 +17,17 @@ A Model Context Protocol server implementation for iOS Simulator control.
 }
 ```
 
+## Prompts
+
+Some examples of prompts:
+
+- What operations does the simulator support?
+- Open shortcuts://
+- What is the bundle ID of the "Settings" app?
+- Set clipboard content to: Hello
+- What is the simulator SDK version?
+- Generate an Appium connection string for the "Settings" app
+
 ## Usage
 
 The server can be started in two modes:
