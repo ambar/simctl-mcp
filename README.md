@@ -11,7 +11,7 @@ A Model Context Protocol server implementation for iOS Simulator control.
   "mcpServers": {
     "simctl-mcp": {
       "command": "npx",
-      "args": ["simctl-mcp"]
+      "args": ["-y", "simctl-mcp"]
     }
   }
 }
@@ -21,8 +21,8 @@ A Model Context Protocol server implementation for iOS Simulator control.
 
 The server can be started in two modes:
 
-1. HTTP Server Mode (default)
-2. STDIO Mode
+1. STDIO Mode (default)
+2. HTTP Server Mode
 
 ### STDIO Mode
 
@@ -48,8 +48,6 @@ PORT=3000 npx simctl-mcp --http
 ```
 
 ## Tools
-
-Based on the code, I can help you with the following iOS simulator operations:
 
 ## Device Management:
 - Create new simulator devices
