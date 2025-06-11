@@ -2,6 +2,8 @@
 
 A Model Context Protocol server implementation for iOS Simulator control.
 
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=simctl-mcp&config=eyJjb21tYW5kIjoibnB4IC15IHNpbWN0bC1tY3AifQ%3D%3D)
+
 ## Config
 
 `.cursor/mcp.json` or `.vscode/mcp.json`:
