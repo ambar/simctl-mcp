@@ -2,6 +2,7 @@
 
 A Model Context Protocol server implementation for iOS Simulator control.
 
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/ambar/simctl-mcp)](https://archestra.ai/mcp-catalog/ambar__simctl-mcp)
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=simctl-mcp&config=eyJjb21tYW5kIjoibnB4IC15IHNpbWN0bC1tY3AifQ%3D%3D)
 
 ## Config
